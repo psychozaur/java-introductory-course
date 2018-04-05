@@ -1,9 +1,5 @@
 package pl.com.empas.java_introductory_course.polymorphism.simple;
 
-import pl.com.empas.java_introductory_course.inheritance.simple.Aeroplane;
-import pl.com.empas.java_introductory_course.inheritance.simple.Car;
-import pl.com.empas.java_introductory_course.inheritance.simple.Vehicle;
-
 public class Main {
 
     public static void main(String[] args) {
