@@ -17,7 +17,7 @@ public class Main {
         vehicle.move();
 
         // doesn't work
-//        anotherVehicle.fly();
+//        vehicle.fly();
 
         // down-casting
         Aeroplane anotherPlane = (Aeroplane) vehicle;
@@ -30,7 +30,10 @@ public class Main {
 
         // but...
         Object object = plane;
-        castToString(object);
+        // uncomment it on you own responsibility
+//        castToString(object);
+//        castToString(plane);
+        saveCastToString(object);
     }
 
     public static void castToAeroplane(Vehicle vehicle) {
@@ -43,5 +46,17 @@ public class Main {
         // boom
         String string = (String) maybeString;
         System.out.println("It's string: " + string);
+    }
+
+    public static void saveCastToString(Object maybeString) {
+        System.out.println("saveCastToString()");
+
+        if (maybeString instanceof String) {
+            String string = (String) maybeString;
+            System.out.println("It's string: " + string);
+
+        } else {
+            System.out.println("It's not String!!!");
+        }
     }
 }
