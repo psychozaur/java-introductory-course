@@ -1,30 +1,38 @@
 package pl.com.empas.java_introductory_course.generics.collections;
 
-public class SimpleLinkedList<V> {
 
-    class Item {
+/**
+ * Please note, that this class is definitely not an exemplary piece of code.
+ * It is intentionally faulty, badly written and lacks many useful features.
+ * Please do not treat this class as a template in your future adventures into code.
+ * It serves its purpose later on.
+ * @param <V>
+ */
+public final class SimpleLinkedList<V> {
+
+    class Item<V> {
         V value;
-        Item next;
-        Item previous;
+        Item<V> next;
+        Item<V> previous;
 
-        Item(V val, Item next, Item prev) {
+        Item(V val, Item<V> next, Item<V> prev) {
             this.value = val;
             this.next = next;
             this.previous = prev;
         }
     }
 
-    private Item root;
+    private Item<V> root;
 
     public SimpleLinkedList() {
 
     }
 
     public SimpleLinkedList(V... vals) {
-        root = new Item(vals[0], null, null);
-        Item tmp = root;
+        root = new Item<V>(vals[0], null, null);
+        Item<V> tmp = root;
         for (int i = 1; i < vals.length; i++) {
-            Item newItem = new Item(vals[i], null, tmp);
+            Item<V> newItem = new Item<V>(vals[i], null, tmp);
             tmp.next = newItem;
             tmp = newItem;
         }
@@ -32,22 +40,22 @@ public class SimpleLinkedList<V> {
 
     public void addLast(V value) {
         if (root == null) {
-            root = new Item(value, null, null);
+            root = new Item<V>(value, null, null);
         } else {
-            Item tmp = root;
+            Item<V> tmp = root;
             while (tmp.next != null) {
                 tmp = tmp.next;
             }
-            tmp.next = new Item(value, null, tmp);
+            tmp.next = new Item<V>(value, null, tmp);
         }
     }
 
     public void addFirst(V value) {
         if (root == null) {
-            root = new Item(value, null, null);
+            root = new Item<V>(value, null, null);
         } else {
-            Item tmp = root;
-            root = new Item(value, tmp, null);
+            Item<V> tmp = root;
+            root = new Item<V>(value, tmp, null);
             tmp.previous = root;
         }
 
@@ -57,12 +65,12 @@ public class SimpleLinkedList<V> {
         V retVal = null;
         if (root != null) {
             if (root.next != null) {
-                Item tmp = root;
+                Item<V> tmp = root;
                 while (tmp.next != null) {
                     tmp = tmp.next;
                 }
                 if (tmp.previous != null) {
-                    Item newLast = tmp.previous;
+                    Item<V> newLast = tmp.previous;
                     newLast.next = null;
                 }
                 retVal = tmp.value;
@@ -79,7 +87,7 @@ public class SimpleLinkedList<V> {
         if (root != null) {
             retVal = root.value;
             if (root.next != null) {
-                Item newFirst = root.next;
+                Item<V> newFirst = root.next;
                 newFirst.previous = null;
                 root = newFirst;
             } else {
@@ -91,7 +99,7 @@ public class SimpleLinkedList<V> {
 
     @Override
     public String toString() {
-        Item tmp = root;
+        Item<V> tmp = root;
         StringBuffer buffer = new StringBuffer("[ ");
         while (tmp != null) {
             buffer.append(tmp.value).append(", ");
