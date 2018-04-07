@@ -20,10 +20,10 @@ public class SimpleLinkedList<V> {
 
     }
 
-    public SimpleLinkedList(V ... vals) {
+    public SimpleLinkedList(V... vals) {
         root = new Item(vals[0], null, null);
         Item tmp = root;
-        for(int i = 1; i < vals.length; i++) {
+        for (int i = 1; i < vals.length; i++) {
             Item newItem = new Item(vals[i], null, tmp);
             tmp.next = newItem;
             tmp = newItem;
@@ -31,11 +31,11 @@ public class SimpleLinkedList<V> {
     }
 
     public void addLast(V value) {
-        if(root == null) {
+        if (root == null) {
             root = new Item(value, null, null);
         } else {
             Item tmp = root;
-            while(tmp.next != null) {
+            while (tmp.next != null) {
                 tmp = tmp.next;
             }
             tmp.next = new Item(value, null, tmp);
@@ -43,7 +43,7 @@ public class SimpleLinkedList<V> {
     }
 
     public void addFirst(V value) {
-        if(root == null) {
+        if (root == null) {
             root = new Item(value, null, null);
         } else {
             Item tmp = root;
@@ -53,38 +53,55 @@ public class SimpleLinkedList<V> {
 
     }
 
-    public void removeLast() {
-        if(root != null) {
-            Item tmp = root;
-            while(tmp.next != null) {
-                tmp = tmp.next;
+    public V removeLast() {
+        V retVal = null;
+        if (root != null) {
+            if (root.next != null) {
+                Item tmp = root;
+                while (tmp.next != null) {
+                    tmp = tmp.next;
+                }
+                if (tmp.previous != null) {
+                    Item newLast = tmp.previous;
+                    newLast.next = null;
+                }
+                retVal = tmp.value;
+            } else {
+                retVal = root.value;
+                root = null;
             }
-            Item newLast = tmp.previous;
-            newLast.next = null;
         }
+        return retVal;
     }
 
-    public void removeFirst() {
-        if(root != null) {
-            Item newFirst = root.next;
-            newFirst.previous = null;
-            root = newFirst;
+    public V removeFirst() {
+        V retVal = null;
+        if (root != null) {
+            retVal = root.value;
+            if (root.next != null) {
+                Item newFirst = root.next;
+                newFirst.previous = null;
+                root = newFirst;
+            } else {
+                root = null;
+            }
         }
+        return retVal;
     }
 
     @Override
     public String toString() {
         Item tmp = root;
         StringBuffer buffer = new StringBuffer("[ ");
-        while(tmp != null) {
+        while (tmp != null) {
             buffer.append(tmp.value).append(", ");
             tmp = tmp.next;
         }
-        return buffer.delete(buffer.length() -2, buffer.length()).append(" ]").toString();
+        return buffer.delete(buffer.length() - 2, buffer.length()).append(" ]").toString();
     }
 
-    public static void main(String [] args) {
-        SimpleLinkedList<Integer> list = new SimpleLinkedList<Integer>(1,2,3,4,5,6);
+    public static void main(String[] args) {
+        SimpleLinkedList<Integer> list = new SimpleLinkedList<Integer>(1, 2, 3, 4, 5, 6);
         System.out.println(list);
         list.addFirst(10);
         list.addLast(30);
