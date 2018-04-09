@@ -1,5 +1,7 @@
 package pl.com.empas.java_introductory_course.oop.solid.common;
 
+import java.util.Random;
+
 public class WordDocument extends OfficeDocument {
 
     private String author;
@@ -59,5 +61,18 @@ public class WordDocument extends OfficeDocument {
         result = 31 * result + (officeVersion != null ? officeVersion.hashCode() : 0);
         result = 31 * result + (template != null ? template.hashCode() : 0);
         return result;
+    }
+
+    //YAGNI violation!
+    public WordDocument concat(WordDocument other) {
+        long fileSize = this.getFileSize() + other.getFileSize();
+        byte [] newContent = new byte[this.content.length + other.content.length];
+        //and obviously do the actual concatenation which is out of scope of this example
+        return new WordDocument(this.fileName, fileSize, this.officeVersion, this.author, newContent, this.template);
+    }
+
+    public int getPagesNumber() {
+        //Actual Word document operations should go here
+        return new Random(System.currentTimeMillis()).nextInt();
     }
 }
