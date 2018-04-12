@@ -13,6 +13,7 @@ public abstract class AbstractDocument {
     public AbstractDocument(String fileName, long fileSize, Object content, DocumentFormatType formatType) {
         this.fileName = fileName;
         this.fileSize = fileSize;
+        this.content = content;
         this.formatType = formatType;
     }
 

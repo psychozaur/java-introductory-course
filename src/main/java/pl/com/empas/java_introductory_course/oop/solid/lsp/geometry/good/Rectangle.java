@@ -1,6 +1,6 @@
 package pl.com.empas.java_introductory_course.oop.solid.lsp.geometry.good;
 
-public class Rectangle {
+public class Rectangle implements AreaCalculatorContract{
     protected int width;
     protected int height;
 
@@ -23,5 +23,10 @@ public class Rectangle {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    @Override
+    public long calculateArea() {
+        return this.height * this.width;
     }
 }

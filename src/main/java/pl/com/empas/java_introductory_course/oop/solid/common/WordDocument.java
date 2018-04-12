@@ -1,5 +1,6 @@
 package pl.com.empas.java_introductory_course.oop.solid.common;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class WordDocument extends OfficeDocument {
@@ -74,5 +75,18 @@ public class WordDocument extends OfficeDocument {
     public int getPagesNumber() {
         //Actual Word document operations should go here
         return new Random(System.currentTimeMillis()).nextInt();
+    }
+
+    @Override
+    public String toString() {
+        return "WordDocument{" +
+                "author='" + author + '\'' +
+                ", officeVersion=" + officeVersion +
+                ", template=" + template +
+                ", fileName='" + fileName + '\'' +
+                ", content=" + Arrays.toString(content) +
+                ", fileSize=" + fileSize +
+                ", officeVersion=" + officeVersion +
+                '}';
     }
 }
