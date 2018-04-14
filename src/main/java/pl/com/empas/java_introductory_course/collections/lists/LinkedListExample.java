@@ -22,7 +22,5 @@ public class LinkedListExample {
         while(iterator.hasNext()) {
             System.out.println(iterator.next());
         }
-
-
     }
 }

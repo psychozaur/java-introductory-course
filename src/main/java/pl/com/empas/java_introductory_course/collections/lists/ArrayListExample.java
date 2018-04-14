@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ArrayListExample {
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         List<String> list = new ArrayList<>();
         list.add("Pear");
         list.add("Banana");
@@ -16,11 +16,13 @@ public class ArrayListExample {
         String replacedElement = list.set(0, "Grapefruit");
 
         int index = 10;
-        if(list.size() > index) {
-            list.add(index, null);
-            System.out.println(list);
-            System.out.println("Replaced value: " + replacedElement);
+        if (list.size() <= index) {
+            ((ArrayList<String>) list).ensureCapacity(index + 1);
         }
+        list.add(index, null);
+        System.out.println(list);
+        System.out.println("Replaced value: " + replacedElement);
+
 
         list.sort(new Comparator<String>() {
             @Override
@@ -28,8 +30,7 @@ public class ArrayListExample {
                 return -o1.compareTo(o2);
             }
         });
-        String [] array = list.toArray(new String [0]);
-
+        String[] array = list.toArray(new String[0]);
 
 
         System.out.println(list);
