@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class DepartamentGenerator {
 
     public static List<Departament> getDepartaments() {
-        return Arrays.asList(new Departament("HR", 200000L), new Departament("IT", 240000L), new Departament("Legal", 100000L));
+        return Arrays.asList(new Departament("HR", 1000L), new Departament("IT", 1500L), new Departament("Legal", 1300L));
     }
 
     public static Map<String, Departament> getDepartamentsMap() {
@@ -30,5 +30,7 @@ public class DepartamentGenerator {
                 EmployeeGenerator.generateEmployeeForName("Paweł")));
         return map;
     }
+
+
 
 }
