@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 public class ReadFileExample {
 
@@ -18,19 +19,22 @@ public class ReadFileExample {
         URL url = ReadFileExample.class.getResource("TextInputNio.txt");
         Path path = Paths.get(url.getPath());
 
-        readStringSimple(path);
+        //readStringSimple(path);
         readStringFromReader(path);
         readStringFromByteChannel(path);
     }
 
     //simple
-    public static void readStringSimple(Path path) {
+    public static Optional<String> readStringSimple(String path) {
         try {
-            List<String> contents = Files.readAllLines(path);
-            contents.stream().forEach(x -> System.out.println(x));
+            List<String> contents = Files.readAllLines(Paths.get(path));
+            StringBuilder sb = new StringBuilder();
+            contents.stream().forEach(x -> sb.append(x).append("\n"));
+            return Optional.of(sb.toString());
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        return Optional.empty();
     }
 
     //proper :)
@@ -61,7 +65,7 @@ public class ReadFileExample {
                 byteBuffer.flip();
             }
         } catch(IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
