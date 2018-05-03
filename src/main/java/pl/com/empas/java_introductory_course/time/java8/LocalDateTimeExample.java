@@ -1,7 +1,6 @@
 package pl.com.empas.java_introductory_course.time.java8;
 
 import java.time.*;
-import java.time.format.DateTimeFormatter;
 
 public class LocalDateTimeExample {
 

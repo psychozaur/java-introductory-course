@@ -2,7 +2,10 @@ package pl.com.empas.java_introductory_course.collections.tasks.task1_index_find
 
 import pl.com.empas.java_introductory_course.collections.common.FruitGenerator;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 public class IndexFinderImpl<E> implements IndexFinder<E> {
 
@@ -13,12 +16,21 @@ public class IndexFinderImpl<E> implements IndexFinder<E> {
      */
     @Override
     public Integer findFirstIndexOf(E elem, List<E> list) {
-        return null;
+        return list.indexOf(elem);
     }
 
     @Override
     public List<Integer> findAllIndexesOf(E element, List<E> list) {
-        return null;
+        List<Integer> indexes = new ArrayList<>();
+        for(int i = 0; i<list.size(); i++) {
+            E candidate = list.get(i);
+            if(candidate.equals(element)) {
+                indexes.add(i);
+            }
+        }
+        if(indexes.size() == 0)
+            indexes.add(-1);
+        return indexes;
     }
 
 
@@ -35,7 +47,7 @@ public class IndexFinderImpl<E> implements IndexFinder<E> {
         //---------------------------
         List<Integer> orangeIndexes = indexFinder.findAllIndexesOf("Orange", fruitList);
         List<Integer> carrotIndexes = indexFinder.findAllIndexesOf("Carrot", fruitList);
-        System.out.println("All indexes of 'Orange' are: " + orangeIndex);
-        System.out.println("All indexes of 'Carrot' are: " + carrotIndex);
+        System.out.println("All indexes of 'Orange' are: " + orangeIndexes);
+        System.out.println("All indexes of 'Carrot' are: " + carrotIndexes);
     }
 }

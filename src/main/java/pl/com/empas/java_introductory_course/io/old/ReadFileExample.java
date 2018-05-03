@@ -12,10 +12,10 @@ public class ReadFileExample {
                 FileInputStream inputStream = null;
                 try {
                     inputStream = new FileInputStream(file);
+
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                    boolean read = true;
                     StringBuilder sb = new StringBuilder();
-                    while(read) {
+                    while(true) {
                         String line = bufferedReader.readLine();
                         if(line == null) {
                             break;

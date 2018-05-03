@@ -15,23 +15,36 @@ public class Salaries {
     Map<Departament, List<Employee>> departamentMap = DepartamentGenerator.getDepartamentsWithEmployeesMap();
 
     /**
-     *
      * @param departament - departament to check
      * @return highest earning employee in a departament;
      */
     public Employee findBestEarningEmployee(Departament departament) {
-      return null;
+        Employee maxSalary = new Employee(0, "", 0);
+        for (Employee e : departamentMap.get(departament)) {
+            if (e.getSalary() > maxSalary.getSalary()) {
+                maxSalary = e;
+            }
+        }
+        return maxSalary;
     }
 
     //Użyj poprzedniej metody!
     public Employee findBestEarningEmployee() {
-     return null;
+        Employee bestEarningEmployee = new Employee(0, "", 0);
+        for (Departament d : departamentMap.keySet()) {
+            Employee candidate = findBestEarningEmployee(d);
+            if(candidate.getSalary() > bestEarningEmployee.getSalary()) {
+                bestEarningEmployee = candidate;
+            }
+        }
+        return bestEarningEmployee;
     }
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         Salaries salaries = new Salaries();
+
         System.out.println("Best earning emloyee in all departaments: " + salaries.findBestEarningEmployee());
-        for(Departament departament : DepartamentGenerator.getDepartaments()) {
+        for (Departament departament : DepartamentGenerator.getDepartaments()) {
             System.out.println("Best earning employee in departament " + departament.getName() + " is " + salaries.findBestEarningEmployee(departament));
         }
     }

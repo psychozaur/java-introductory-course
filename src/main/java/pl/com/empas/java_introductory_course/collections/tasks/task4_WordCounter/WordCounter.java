@@ -1,6 +1,6 @@
 package pl.com.empas.java_introductory_course.collections.tasks.task4_WordCounter;
 
-import java.util.Map;
+import java.util.*;
 
 public class WordCounter {
 
@@ -30,14 +30,59 @@ public class WordCounter {
 
 
     public Map<String, Integer> getTop5WordsCount(String text) {
-        return null;
+        Map<String, Integer> wordCount = new HashMap<>();
+        //ugly
+//        text = text.replace(",","");
+//        text = text.replace(".", "");
+//        text = text.replace(":","");
+//        text = text.replace(";","");
+//        text = text.replace("\n","");
+//        text = text.replace("(","");
+//        text = text.replace(")","");
+//        String [] words = text.toLowerCase().split((" "));
+        //neat
+        String [] words = text.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+");
+
+        for(String w : words) {
+            if(!wordCount.containsKey(w)) {
+                wordCount.put(w, 0);
+            }
+            wordCount.put(w, wordCount.get(w) + 1);
+        }
+
+        Map<String, Integer> top5  = new TreeMap<>();
+        List<Map.Entry<String, Integer>> mapEntryList = new ArrayList<>(wordCount.entrySet());
+        mapEntryList.sort(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return o1.getValue() == o2.getValue() ? 0 :
+                        o1.getValue() > o2.getValue() ? -1 : 1;
+            }
+        });
+
+        int occurencesCount = 1;
+        int currentCount = mapEntryList.get(0).getValue();
+        ListIterator<Map.Entry<String, Integer>> iterator = mapEntryList.listIterator();
+        while(iterator.hasNext()) {
+            Map.Entry<String, Integer> entry = iterator.next();
+            if(entry.getValue() < currentCount) {
+                if(occurencesCount++ >=5)
+                    break;
+                currentCount = entry.getValue();
+            }
+            top5.put(entry.getKey(), entry.getValue());
+        }
+
+
+        return top5;
+
     }
 
     public static void main(String [] args) {
         WordCounter counter = new WordCounter();
 
-        System.out.println("Top 10 words count for Hamlet is: " + counter.getTop5WordsCount(hamlet));
-        System.out.println("Top 10 words count for LoremIpsum is: " + counter.getTop5WordsCount(loremIpsum));
+        System.out.println("Top 5 words count for Hamlet is: " + counter.getTop5WordsCount(hamlet));
+        System.out.println("Top 5 words count for LoremIpsum is: " + counter.getTop5WordsCount(loremIpsum));
     }
 
 }

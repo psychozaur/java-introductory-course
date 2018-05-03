@@ -8,7 +8,12 @@ public class Departament {
     }
 
     private final String name;
-    private final Long budget;
+
+    public void setBudget(Long budget) {
+        this.budget = budget;
+    }
+
+    private Long budget;
 
     @Override
     public boolean equals(Object o) {
