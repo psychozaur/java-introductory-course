@@ -1,6 +1,6 @@
 package pl.com.empas.java_introductory_course.generics.converters;
 
-public interface ConverterContract<V, T> {
+public interface ConverterContract<FROM, TO> {
 
-    public T convert(V value);
+    TO convert(FROM value);
 }

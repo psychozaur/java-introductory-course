@@ -1,8 +1,8 @@
 package pl.com.empas.java_introductory_course.oop.solid.lsp.documents.good;
 
-public class ExcelDocument extends BinaryDocument {
+public class ExcelDocument extends OfficeDocument {
 
-    public ExcelDocument(String fileName, long fileSize, byte [] content) {
-        super(fileName, fileSize, content);
+    public ExcelDocument(String fileName, long fileSize, OfficeVersion version, byte [] content) {
+        super(fileName, fileSize, version, content);
     }
 }

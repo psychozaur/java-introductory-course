@@ -1,18 +1,28 @@
-package pl.com.empas.java_introductory_course.oop.solid.common;
+package pl.com.empas.java_introductory_course.oop.solid.lsp.documents.good;
 
 import java.util.Arrays;
 
-public abstract class BinaryDocument {
+public abstract class OfficeDocument {
 
     protected final String fileName;
 
     protected byte [] content;
     protected long fileSize;
+    protected OfficeVersion officeVersion;
 
-    public BinaryDocument(String fileName, long fileSize, byte [] content) {
+    public OfficeDocument(String fileName, long fileSize, OfficeVersion version, byte [] content) {
         this.fileName = fileName;
         this.fileSize = fileSize;
         this.content = content;
+        this.officeVersion = version;
+    }
+
+    public OfficeVersion getOfficeVersion() {
+        return officeVersion;
+    }
+
+    public void setOfficeVersion(OfficeVersion officeVersion) {
+        this.officeVersion = officeVersion;
     }
 
     @Override
@@ -20,11 +30,12 @@ public abstract class BinaryDocument {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        BinaryDocument that = (BinaryDocument) o;
+        OfficeDocument that = (OfficeDocument) o;
 
         if (fileSize != that.fileSize) return false;
         if (fileName != null ? !fileName.equals(that.fileName) : that.fileName != null) return false;
-        return Arrays.equals(content, that.content);
+        if (!Arrays.equals(content, that.content)) return false;
+        return officeVersion == that.officeVersion;
     }
 
     @Override
@@ -32,6 +43,7 @@ public abstract class BinaryDocument {
         int result = fileName != null ? fileName.hashCode() : 0;
         result = 31 * result + Arrays.hashCode(content);
         result = 31 * result + (int) (fileSize ^ (fileSize >>> 32));
+        result = 31 * result + (officeVersion != null ? officeVersion.hashCode() : 0);
         return result;
     }
 
