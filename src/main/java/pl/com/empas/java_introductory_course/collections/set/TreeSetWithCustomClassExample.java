@@ -11,10 +11,14 @@ public class TreeSetWithCustomClassExample {
 
     public static void main(String[] args) {
         List<Tree> listOfTrees = new ArrayList<>();
+
         listOfTrees.add(new Tree("Jodła", 15));
         listOfTrees.add(new Tree("Topola", 30));
+        listOfTrees.add(new Tree("Dąb", 10));
+        listOfTrees.add(new Tree("Dąb", 10));
         listOfTrees.add(new Tree("Buk", 10));
-        listOfTrees.add(new Tree("Buk", 10));
+
+        new Tree("Jodła", 15).compareTo(new Tree("Buk", 10));
 
         Set<Tree> setOfTrees = new TreeSet<>();
         setOfTrees.addAll(listOfTrees);
