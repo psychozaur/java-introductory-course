@@ -1,5 +1,8 @@
 package pl.com.empas.java_introductory_course.threads;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 class Job implements Runnable {
     private final Object resourceA, resourceB;
 
@@ -38,6 +41,8 @@ public class ThreadLockExample {
 
         Job firstJob = new Job(resourceOne, resourceTwo);
         Job secondJob = new Job(resourceOne, resourceTwo);
+        // always acquire resources in the same order
+//        Job secondJob = new Job(resourceTwo, resourceOne);
 
         new Thread(firstJob, "Donald").start();
         new Thread(secondJob, "Jarosław").start();
