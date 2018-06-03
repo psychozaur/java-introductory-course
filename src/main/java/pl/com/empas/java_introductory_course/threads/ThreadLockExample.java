@@ -32,4 +32,14 @@ class Job implements Runnable {
 }
 
 public class ThreadLockExample {
+
+    public static void main(String[] args) {
+        Object resourceOne = new Object(), resourceTwo = new Object();
+
+        Job firstJob = new Job(resourceOne, resourceTwo);
+        Job secondJob = new Job(resourceOne, resourceTwo);
+
+        new Thread(firstJob, "Donald").start();
+        new Thread(secondJob, "Jarosław").start();
+    }
 }
