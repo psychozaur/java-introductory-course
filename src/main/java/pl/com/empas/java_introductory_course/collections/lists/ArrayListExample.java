@@ -19,7 +19,8 @@ public class ArrayListExample {
         if (list.size() <= index) {
             ((ArrayList<String>) list).ensureCapacity(index + 1);
         }
-        list.add(index, null);
+        System.out.println(list.size());
+        //list.add(index, null);
         System.out.println(list);
         System.out.println("Replaced value: " + replacedElement);
 
